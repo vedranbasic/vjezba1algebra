@@ -4,6 +4,19 @@ public class Main {
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Pozdrav!");
+        int i = 0;
+        while(i < 10000) {
+            int sum = 0;
+            int j = i;
+
+            for (; j>0; j = j / 10) {
+                int znamenka = j%10;
+                sum += znamenka * znamenka * znamenka;
+            }
+            if (sum < 10000 && sum == i) {
+                System.out.println(i + "je Armstrongov broj!");
+            }
+            i++;
+        }
     }
 }
