@@ -20,7 +20,7 @@ public class Main {
                 break;
             }
 
-            while (ostatak - v >= 0) {
+            while (Math.round(ostatak * 100.0) / 100.0 - v >= 0) {
                 brojNovcanica += 1;
                 ostatak = Math.round(ostatak * 100.0) / 100.0 - v;
                 /*
