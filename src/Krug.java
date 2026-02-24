@@ -1,19 +1,16 @@
-public class Krug {
-    protected String naziv;
+public class Krug extends GeometrijskiLik {
     protected int r;
     public Krug (String naziv, int r) {
-        this.naziv = naziv;
+        super(naziv);
         this.r = r;
     }
 
-    public String getNaziv() {
-        return naziv;
-    }
-
+    @Override
     public double getPovrsina() {
         return r*r*Math.PI;
     }
 
+    @Override
     public double getOpseg() {
         return 2*r*Math.PI;
     }
