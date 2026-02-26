@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 
@@ -5,6 +7,26 @@ import java.util.Scanner;
 // ne radi na 48029936706
 public class Main {
     public static void main(String[] args) {
+        // osnovneFunkcionalnosti();
+
+        ArrayList<GeometrijskiLik> geoLikovi = new ArrayList<>();
+        Krug prvi = new Krug("Prvi krug", 5);
+        Pravokutnik drugi = new Pravokutnik("Prvi pravokutnik", 1, 2);
+        Trokut treci = new Trokut("Prvi Trokut", 5, 4, 4);
+
+        geoLikovi.add(prvi);
+        geoLikovi.add(drugi);
+        geoLikovi.add(treci);
+
+        Collections.sort(geoLikovi, Collections.reverseOrder());
+
+        for (GeometrijskiLik geo : geoLikovi) {
+            System.out.println(geo.getNaziv() + ": " + geo.getPovrsina());
+        }
+
+    }
+
+    private static void osnovneFunkcionalnosti() {
         System.out.println("______________________");
 
         Krug prvi = new Krug("Prvi krug", 5);
@@ -23,6 +45,7 @@ public class Main {
         System.out.println("Naziv Trokuta: " + treci.getNaziv());
         System.out.println("Povrsina Trokuta: " + treci.getPovrsina());
         System.out.println("Opseg Trokuta: " + treci.getOpseg());
-
     }
 }
+
+
