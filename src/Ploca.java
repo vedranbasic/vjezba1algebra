@@ -17,6 +17,9 @@ public class Ploca {
         String checkWinner = "";
         while (checkWinner == "") {
             // TODO: optimizirati nekom petljom koja alternira X i O
+            // TODO: prikaz nakon svakog upisa
+            // TODO: provjera win conditiona i ponovno zapocinanje ako je nerijeseno
+            
             prikaziPoljeVizualno();
             traziUnos("X");
             prikaziPoljeVizualno();
