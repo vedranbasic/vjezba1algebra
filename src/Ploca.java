@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Ploca {
 
     String[][] polja;
+    int ispunjenost;
 
     public Ploca() {
         this.polja = new String[][]{
@@ -10,37 +11,27 @@ public class Ploca {
                 {"4","5","6"},
                 {"7","8","9"}
         };
+        this.ispunjenost = 0;
     }
 
-    public void zapocniIgru() {
+    public void igraj() {
 
+        String zadnjiIgrao = "X";
+        boolean plocaIspunjena = false;
         String checkWinner = "";
+
         while (checkWinner == "") {
-            // TODO: optimizirati nekom petljom koja alternira X i O
-            // TODO: prikaz nakon svakog upisa
-            // TODO: provjera win conditiona i ponovno zapocinanje ako je nerijeseno
-            
-            prikaziPoljeVizualno();
-            traziUnos("X");
-            prikaziPoljeVizualno();
-            traziUnos("O");
-            prikaziPoljeVizualno();
-            traziUnos("X");
-            prikaziPoljeVizualno();
-            traziUnos("O");
-            prikaziPoljeVizualno();
-            traziUnos("X");
-            prikaziPoljeVizualno();
-            traziUnos("O");
-            prikaziPoljeVizualno();
-            traziUnos("X");
-            prikaziPoljeVizualno();
-            traziUnos("O");
-            prikaziPoljeVizualno();
-            traziUnos("X");
+            traziUnos(zadnjiIgrao);
+
+            // alterniranje
+            if (zadnjiIgrao == "X") {
+                zadnjiIgrao = "O";
+            } else {
+                zadnjiIgrao = "X";
+            }
             prikaziPoljeVizualno();
             checkWinner = this.provjeriRijesenost();
-            if (checkWinner == "") {
+            if (checkWinner == "" && this.ispunjenost == 9) {
                 ponovnoZapocni();
             }
         }
@@ -85,6 +76,7 @@ public class Ploca {
                 this.upisiUnutarPolja(2, 2, igrac);
                 break;
         }
+        this.ispunjenost += 1;
     }
 
     private void upisiUnutarPolja(int koordinata1, int koordinata2, String igrac) {
@@ -106,6 +98,7 @@ public class Ploca {
             {"4","5","6"},
             {"7","8","9"}
         };
+        this.ispunjenost = 0;
 
     }
 
