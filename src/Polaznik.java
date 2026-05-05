@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Polaznik {
+public class Polaznik implements Comparable<Polaznik> {
     private String ime;
     private String prezime;
     private String email;
@@ -20,6 +20,10 @@ public class Polaznik {
         return this.email;
     }
 
+    public String getPrezime() {
+        return this.prezime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -31,6 +35,11 @@ public class Polaznik {
     @Override
     public int hashCode() {
         return Objects.hash(this.email);
+    }
+
+    @Override
+    public int compareTo(Polaznik other) {
+        return this.prezime.compareTo(other.getPrezime());
     }
 
 }

@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class Evidencija {
-    HashSet<Polaznik> polaznici;
+    TreeSet<Polaznik> polaznici;
 
     public Evidencija() {
-        this.polaznici = new HashSet<Polaznik>();
+        this.polaznici = new TreeSet<Polaznik>();
     }
 
     public void UnesiPolaznika() {
