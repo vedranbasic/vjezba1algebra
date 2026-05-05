@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Evidencija {
-    ArrayList<Polaznik> polaznici;
+    HashSet<Polaznik> polaznici;
 
     public Evidencija() {
-        this.polaznici = new ArrayList<Polaznik>();
+        this.polaznici = new HashSet<Polaznik>();
     }
 
     public void UnesiPolaznika() {
@@ -20,8 +21,15 @@ public class Evidencija {
         System.out.println("Unesite email:");
         String email = unos.nextLine();
 
-        this.polaznici.add(new Polaznik(ime, prezime, email));
-        System.out.println("Uspješno unešen polaznik!");
+
+        Polaznik novi = new Polaznik(ime, prezime, email);
+
+        Boolean dodan = this.polaznici.add(novi);
+        if (dodan) {
+            System.out.println("Uspjesno dodan novi polaznik!");
+        } else {
+            System.out.println("Greska kod unosa polaznika! Duplikat nadjen!");
+        }
 
 
     }

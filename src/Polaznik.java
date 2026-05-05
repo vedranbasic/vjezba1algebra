@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Polaznik {
     private String ime;
     private String prezime;
@@ -16,6 +18,19 @@ public class Polaznik {
 
     public String getEmail() {
         return this.email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Polaznik)) return false;
+        Polaznik that = (Polaznik) o;
+        return Objects.equals(that.getEmail(), this.getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.email);
     }
 
 }
