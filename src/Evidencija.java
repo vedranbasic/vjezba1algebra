@@ -1,13 +1,10 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Evidencija {
-    TreeSet<Polaznik> polaznici;
+    HashMap<String, Polaznik> polaznici = new HashMap<String, Polaznik>();
 
     public Evidencija() {
-        this.polaznici = new TreeSet<Polaznik>();
+        this.polaznici = new HashMap<String, Polaznik>();
     }
 
     public void UnesiPolaznika() {
@@ -24,20 +21,19 @@ public class Evidencija {
 
 
         Polaznik novi = new Polaznik(ime, prezime, email);
-
-        Boolean dodan = this.polaznici.add(novi);
-        if (dodan) {
-            System.out.println("Uspjesno dodan novi polaznik!");
-        } else {
+        if (this.polaznici.containsKey(email)) {
             System.out.println("Greska kod unosa polaznika! Duplikat nadjen!");
+        } else {
+            this.polaznici.put(email, novi);
+            System.out.println("Uspjesno unesen korisnik!");
         }
 
 
     }
 
     public void IspisPolaznika() {
-        for (Polaznik p : this.polaznici) {
-            System.out.println(p.toString());
+        for (HashMap.Entry<String, Polaznik> entry : this.polaznici.entrySet()) {
+            System.out.println(entry.getValue().toString());
         }
     }
 
@@ -46,9 +42,9 @@ public class Evidencija {
         Scanner unos = new Scanner(System.in);
         String email = unos.nextLine();
 
-        for (Polaznik p : this.polaznici) {
-            if (p.getEmail().contains(email)) {
-                System.out.println(p.toString());
+        for (HashMap.Entry<String, Polaznik> entry : this.polaznici.entrySet()) {
+            if (entry.getKey().contains(email)) {
+                System.out.println(entry.getValue().toString());
             }
         }
     }
