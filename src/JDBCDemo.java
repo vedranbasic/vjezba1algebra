@@ -11,57 +11,33 @@ public class JDBCDemo {
         // Kreiranje DataSource objekta
         DataSource dataSource = createDataSource();
 
-        ArrayList<String> drzave = new ArrayList<>(
-                Arrays.asList(
-                        "Tunguzija5",
-                        "Kina5",
-                        "Poljska5",
-                        "Tajland5",
-                        "Njemačka5",
-                        "Francuska5",
-                        "Italija5",
-                        "Španjolska5",
-                        "Portugal5",
-                        "Austrija5"
-                )
-        );
+        try(Connection conn = dataSource.getConnection()) {
+            // iskljuci automatski commit
+            conn.setAutoCommit(false);
 
-        // Spajanje na bazu podataka
-        System.out.println("Spajanje...");
+            try(Statement stmt1 = conn.createStatement();
+                Statement stmt2 = conn.createStatement()) {
 
-        try {
-            Connection connection = dataSource.getConnection();
-            CallableStatement callStmt = connection.prepareCall("{CALL InsertDrzava(?)}");
 
-            // id-jevi veci od 6
-            for (int i=0; i<drzave.size(); i++) {
-                callStmt.setString(1, drzave.get(i));
-                callStmt.execute();
+
+                // izvrsi promjene
+                String sql1 = "UPDATE Stavka SET CijenaPoKomadu = CijenaPoKomadu + 10 WHERE IDStavka = 8";
+                String sql2 = "UPDATE Stavka SET CijenaPoKomadu = CijenaPoKomadu - 10 WHERE IDStavka = 9";
+
+
+                stmt1.executeUpdate(sql1);
+                stmt2.executeUpdate(sql2);
+
+                // komitaj transakciju
+                conn.commit();
             }
-
-
-
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Drzava ORDER BY IdDrzava ASC");
-            while (rs.next()) {
-                System.out.println(rs.getInt("IdDrzava") + ". " + rs.getString("Naziv"));
+            catch(SQLException e) {
+                conn.rollback();
             }
-
-            CallableStatement callStmt2 = connection.prepareCall("{CALL DeleteDrzava(?)}");
-            callStmt2.setInt("IdDrzavaVeciOd", 5);
-            callStmt2.execute();
-
-            ResultSet rs2 = stmt.executeQuery("SELECT * FROM Drzava ORDER BY IdDrzava ASC");
-            while (rs2.next()) {
-                System.out.println(rs2.getInt("IdDrzava") + ". " + rs2.getString("Naziv"));
-            }
-
-
         } catch (SQLException e) {
-            System.err.println("Greška prilikom spajanja na bazu podataka:");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        System.out.println("Kraj...");
+        System.out.println("Kraj");
     }
 
     // Metoda za stvaranje DataSource objekta
